@@ -2,14 +2,15 @@ package main
 
 import (
 	"flag"
-	"fmt"
+	"log"
+	"os"
 
 	postfixcli "github.com/ukrustacean/postfix-cli"
 )
 
 var (
-	inputExpression = flag.String("e", "", "Expression to compute")
-	// TODO: Add other flags support for input and output configuration.
+// inputExpression = flag.String("e", "", "Expression to compute")
+// TODO: Add other flags support for input and output configuration.
 )
 
 func main() {
@@ -17,12 +18,13 @@ func main() {
 
 	// TODO: Change this to accept input from the command line arguments as described in the task and
 	//       output the results using the ComputeHandler instance.
-	//       handler := &lab2.ComputeHandler{
-	//           Input: {construct io.Reader according the command line parameters},
-	//           Output: {construct io.Writer according the command line parameters},
-	//       }
-	//       err := handler.Compute()
+	handler := &postfixcli.ComputeHandler{
+		Input:  os.Stdin,
+		Output: os.Stdout,
+	}
+	err := handler.Compute()
 
-	res, _ := postfixcli.EvaluatePostfix("+ 2 2")
-	fmt.Println(res)
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
 }
