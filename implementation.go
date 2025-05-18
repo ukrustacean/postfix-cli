@@ -23,7 +23,7 @@ func EvaluatePostfix(expression string) (int, error) {
 			var result int
 			switch token {
 			case "+":
-				result = a + b
+				result = a - b
 			case "-":
 				result = a - b
 			case "*":
